@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  {% load accounts_filters %}
+  <h2>Profile</h2>
+  <p>
+    {% if object.avatar|starts_with:"http" %}
+      <img src="{{ object.avatar }}" alt="{{ object.username }}" />
+    {% elif object.avatar %}
+      <img src="{{ object.avatar.url }}" alt="{{ object.username }}" />
+    {% endif %}
+  </p>
+  <p>User name : {{ object.username }} </p>
+  <p>Email : {{ object.email }} </p>
+  <p>First name : {{ object.first_name }} </p>
+  <p>Last name : {{ object.last_name }} </p>
+  <p>Language : {{ object.language }} </p>
+  <div>
+      <a href="{% url 'accounts-update' pk=object.id %}">Update account</a>
+    </div>
+  <div>
+    <a href="{% url 'accounts-delete' pk=object.id %}">Remove account</a>
+  </div>
+{% endblock %}
