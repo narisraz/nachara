@@ -3,7 +3,14 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+  {% load i18n %}
   {% load accounts_filters %}
+  {% trans 'username' as username %}
+  {% trans 'email address' as email_address %}
+  {% trans 'first name' as first_name %}
+  {% trans 'last name' as last_name %}
+  {% trans 'langage' as language %}
+
   <h2>Profile</h2>
   <p>
     {% if object.avatar|starts_with:"http" %}
@@ -12,15 +19,16 @@
       <img src="{{ object.avatar.url }}" alt="{{ object.username }}" />
     {% endif %}
   </p>
-  <p>User name : {{ object.username }} </p>
-  <p>Email : {{ object.email }} </p>
-  <p>First name : {{ object.first_name }} </p>
-  <p>Last name : {{ object.last_name }} </p>
-  <p>Language : {{ object.language }} </p>
+
+  <p> {{ username|capfirst }} : {{ object.username }} </p>
+  <p> {{ email_address|capfirst }} : {{ object.email }} </p>
+  <p> {{ first_name|capfirst }} : {{ object.first_name }} </p>
+  <p> {{ last_name|capfirst }} : {{ object.last_name }} </p>
+  <p> {{ language|capfirst }} : {{ object.language }} </p>
   <div>
-      <a href="{% url 'accounts-update' pk=object.id %}">Update account</a>
+      <a href="{% url 'accounts-update' pk=object.id %}">{% trans 'Mettre à jour votre compte' %}</a>
     </div>
   <div>
-    <a href="{% url 'accounts-delete' pk=object.id %}">Remove account</a>
+    <a href="{% url 'accounts-delete' pk=object.id %}">{% trans 'Supprimer le compte' %}</a>
   </div>
 {% endblock %}

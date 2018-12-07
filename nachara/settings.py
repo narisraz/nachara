@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,6 +57,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE_CLASSES = (
+   'django.contrib.sessions.middleware.SessionMiddleware',
+   'django.middleware.locale.LocaleMiddleware',
+   'django.middleware.common.CommonMiddleware',
+)
+
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
@@ -99,6 +106,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nachara.wsgi.application'
 
+SESSION_SAVE_EVERY_REQUEST = True
+
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -130,24 +139,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-SESSION_SAVE_EVERY_REQUEST = True
 
 AUTH_USER_MODEL = 'accounts.User'
 STATIC_URL = '/static/'
@@ -162,3 +155,20 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/2.1/topics/i18n/
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('fr', _('French')),
+)
+LANGUAGE_CODE = 'fr'
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True

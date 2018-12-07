@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 
 def upload_image_dir(user, filename):
@@ -12,11 +13,7 @@ def upload_image_dir(user, filename):
 class User(AbstractUser):
     avatar = models.ImageField(upload_to=upload_image_dir, default=settings.DEFAULT_PHOTO_PROFIL, blank=True, null=True)
     email = models.EmailField(unique=True)
-    LANGUAGE_CHOICES = (
-        ('fr', 'Français'),
-        ('en', 'English')
-    )
-    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=3, default='fr')
+    language = models.CharField(_('langage'), choices=settings.LANGUAGES, max_length=3, default=settings.LANGUAGE_CODE)
     oauth = models.BooleanField(default=False)
 
     def __str__(self):

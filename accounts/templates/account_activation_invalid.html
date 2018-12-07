@@ -1,1 +1,22 @@
-Error activating the accounts
+{% extends 'base.html' %}
+
+{% block title %}
+  {% load i18n %}
+  {% trans "erreur - creation compte" as error_create_account %}
+
+  {{ error_create_account|capfirst }}
+{% endblock %}
+
+{% block content %}
+  {% load i18n %}
+  {% trans "s'inscrire" as signup %}
+
+  {% blocktrans %}
+  Erreur lors de l'activation du compte. 
+  Créer un nouveau compte, en suivant ci-dessous
+  {% endblocktrans %}
+  <p>
+    <a href="{% url "accounts-add" %}"> {{ signup|capfirst }} </a>
+  </p>
+{% endblock %}
+

@@ -1,47 +1,45 @@
+
 {% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+
+  {% trans 'connexion' as login %}
+  
+  {{ login|capfirst }}
+{% endblock %}
 
 {% block content %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+  {% trans 'connexion' as login %}
+  {% trans 'mot de passe oublié' as lost_password %}
+  {% trans 'ou' as or %}
+  {% trans 'créer un compte' as create_account %}
 
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
+  <h1>{{ login|capfirst }}</h1>
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
   {% endif %}
-{% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
+  <form method="post" action="{% url 'login' %}"> {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{{ login|capfirst }}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
 
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
+  <div>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+  </div>
 
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<div>
-  <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
-</div>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-<p>--OR--</p>
-<div>
-  <a href="{% url 'accounts-add' %}">Create account</a>
-</div>
+  <p><a href="{% url 'password_reset' %}">{{ lost_password|capfirst }}?</a></p>
+  <p>-- {{ or|capfirst }} --</p>
+  <div>
+    <a href="{% url 'accounts-add' %}">{{ create_account|capfirst }}</a>
+  </div>
 {% endblock %}

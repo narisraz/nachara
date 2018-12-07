@@ -1,7 +1,11 @@
-{% autoescape off %}
-Hi {{ user.username }},
+{% load i18n %}
 
-Please click on the link below to confirm your registration:
+{% autoescape off %}
+{% trans "salut" %} {{ user.username }},
+{% blocktrans %} 
+Vous recevez ce mail car vous avez demandé à vous inscrire sur le site http://{{ domain }}.
+Allez sur le lien ci-dessous pour valider votre inscription.
+{% endblocktrans %}
 
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 {% endautoescape %}

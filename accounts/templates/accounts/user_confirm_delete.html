@@ -3,10 +3,14 @@
 {% block title %}Delete User{% endblock %}
 
 {% block content %}
-<form method="post">
-  {% csrf_token %}
-  <p>Are you sure you want to delete "{{ object }}"?</p>
-  <input type="submit" value="Confirm" />
-</form>
+  {% load i18n %}
+  {% trans 'en appuyant sur le bouton Confirmer, vous supprimerez définitivement votre compte' as remove_account %}
+  {% trans 'confirmer' as confirm %}
+
+  <form method="post">
+    {% csrf_token %}
+    <p> {{ remove_account|capfirst }} </p>
+    <input type="submit" value="{{ confirm|capfirst }}" />
+  </form>
 {% endblock %}
 
