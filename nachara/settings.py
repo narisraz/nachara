@@ -50,18 +50,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-MIDDLEWARE_CLASSES = (
-   'django.contrib.sessions.middleware.SessionMiddleware',
-   'django.middleware.locale.LocaleMiddleware',
-   'django.middleware.common.CommonMiddleware',
-)
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
@@ -99,6 +94,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -161,14 +157,11 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGES = (
-    ('en', _('English')),
-    ('fr', _('French')),
+    ('en', 'English'),
+    ('fr', 'Français'),
 )
 LANGUAGE_CODE = 'fr'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
-TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
-USE_TZ = True

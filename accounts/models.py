@@ -13,7 +13,7 @@ def upload_image_dir(user, filename):
 class User(AbstractUser):
     avatar = models.ImageField(upload_to=upload_image_dir, default=settings.DEFAULT_PHOTO_PROFIL, blank=True, null=True)
     email = models.EmailField(unique=True)
-    language = models.CharField(_('langage'), choices=settings.LANGUAGES, max_length=3, default=settings.LANGUAGE_CODE)
+    language = models.CharField(_('langage'), choices=settings.LANGUAGES, max_length=6, default=settings.LANGUAGE_CODE)
     oauth = models.BooleanField(default=False)
 
     def __str__(self):

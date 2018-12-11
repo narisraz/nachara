@@ -7,6 +7,8 @@ from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
+from django.utils import translation
+from django.conf import settings
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .tokens import account_activation_token 
@@ -22,6 +24,12 @@ class AccountsCreate(CreateView):
         user = form.save()
         form.send_email(self.request, user)
         return redirect('accounts-created')
+
+    def post(self, request, *args, **kwargs):
+        user_language = request.POST.get('language')
+        translation.activate(user_language)
+        request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+        return super().post(self, request, *args, **kwargs)
 
 
 class AccountsDelete(DeleteView):
@@ -56,15 +64,28 @@ class AccountsUpdate(UpdateView):
             return super().render_to_response(context, **response_kwargs)
         raise PermissionDenied
 
+    def post(self, request, *args, **kwargs):
+        user_language = request.POST.get('language')
+        translation.activate(user_language)
+        request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+        return super().post(self, request, *args, **kwargs)
+
+
 class AccountsDetail(DetailView):
     model = User
     queryset = User.objects.all()
 
     def render_to_response(self, context, **response_kwargs):
-        print(self.request.user.avatar)
+        print(translation.get_language())
         if self.request.user == context['user'] or self.request.user.is_staff:
             return super().render_to_response(context, **response_kwargs)
         raise PermissionDenied
+
+    def get_context_data(self, **kwargs):
+        langDict = { a: b for a, b in settings.LANGUAGES }
+        context = super(AccountsDetail, self).get_context_data(**kwargs)
+        context['user_language'] = langDict[self.request.user.language]
+        return context
 
 
 def activate(request, uidb64, token):

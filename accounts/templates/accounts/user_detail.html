@@ -24,7 +24,7 @@
   <p> {{ email_address|capfirst }} : {{ object.email }} </p>
   <p> {{ first_name|capfirst }} : {{ object.first_name }} </p>
   <p> {{ last_name|capfirst }} : {{ object.last_name }} </p>
-  <p> {{ language|capfirst }} : {{ object.language }} </p>
+  <p> {{ language|capfirst }} : {{ user_language }} </p>
   <div>
       <a href="{% url 'accounts-update' pk=object.id %}">{% trans 'Mettre à jour votre compte' %}</a>
     </div>

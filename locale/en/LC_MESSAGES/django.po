@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\accounts\forms.py:23
 msgid "Activez votre compte"
@@ -76,10 +76,8 @@ msgid "mail d'activation envoyé"
 msgstr ""
 
 #: .\accounts\templates\accounts\user_detail.html:8
-#, fuzzy
-#| msgid "Username"
 msgid "username"
-msgstr "Nom d'utilisateur"
+msgstr ""
 
 #: .\accounts\templates\accounts\user_detail.html:9
 msgid "email address"
@@ -112,52 +110,52 @@ msgstr ""
 
 #: .\templates\base.html:10
 msgid "connecté en tant que"
-msgstr ""
+msgstr "connected as"
 
 #: .\templates\base.html:11
 msgid "se déconnecter"
-msgstr ""
+msgstr "loggout"
 
 #: .\templates\base.html:12
 #: .\templates\registration\password_reset_complete.html:5
 msgid "se connecter"
-msgstr ""
+msgstr "login"
 
 #: .\templates\base.html:13
 msgid "accueil"
-msgstr ""
+msgstr "home"
 
 #: .\templates\base.html:14
 msgid "administration"
-msgstr ""
+msgstr "administration"
 
 #: .\templates\registration\login.html:8 .\templates\registration\login.html:15
 msgid "connexion"
-msgstr ""
+msgstr "login"
 
 #: .\templates\registration\login.html:16
 msgid "mot de passe oublié"
-msgstr ""
+msgstr "forgot password"
 
 #: .\templates\registration\login.html:18
 msgid "créer un compte"
-msgstr ""
+msgstr "create an account"
 
 #: .\templates\registration\password_reset_complete.html:6
 msgid "mot de passe changé correctement"
-msgstr ""
+msgstr "password has been change correctly"
 
 #: .\templates\registration\password_reset_confirm.html:5
 msgid "entrez et confirmez votre mot de passe"
-msgstr ""
+msgstr "enter and confirm your password"
 
 #: .\templates\registration\password_reset_confirm.html:6
 msgid "changer mot de passe"
-msgstr ""
+msgstr "change password"
 
 #: .\templates\registration\password_reset_confirm.html:7
 msgid "changement de mot de passe échoué"
-msgstr ""
+msgstr "error changing password process"
 
 #: .\templates\registration\password_reset_confirm.html:8
 msgid ""
@@ -165,6 +163,8 @@ msgid ""
 "ce lien a déjà été visité une fois. Visitez ce lien pour faire une nouvelle "
 "requête de changement de mot de passe"
 msgstr ""
+"the link you're trying to visit is no more valid, probably because this link "
+"has already been visited before. Go to this link to request new password"
 
 #: .\templates\registration\password_reset_done.html:5
 msgid "réinitialisation effectuée"
@@ -195,6 +195,3 @@ msgstr ""
 #: .\templates\registration\password_reset_form.html:12
 msgid "réinitialiser"
 msgstr ""
-
-#~ msgid "Log in"
-#~ msgstr "Log in"
